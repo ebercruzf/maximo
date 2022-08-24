@@ -1,0 +1,76 @@
+hr.red {
+	margin-bottom: 10px !important;
+}
+
+.tab-content2 {
+	padding: 5px !important;
+}
+
+.pagination, .dataTables_info, .dataTables_filter {
+	font-size: 12px !important;
+}
+
+hr.red {
+	margin-bottom: 10px !important;
+}
+
+.tab-content2 {
+	padding: 5px !important;
+}
+
+/* .pagination, .dataTables_info, .dataTables_filter { */
+/* 	font-size: 12px !important; */
+/* } */
+
+.fs-12 {
+	font-size: 12px;
+}
+
+.fs-14 {
+	font-size: 13px;
+}
+
+.modal-body {
+	padding: 5px;
+}
+
+.color-icon {
+	color: #338248;
+}
+
+body, .btn-default {
+	color: black;
+}
+
+.navbar-brand {
+	font-size: 12px;
+	color: black !important;
+}
+
+.mt-40 {
+	margin-top: 40px;
+}
+
+.mt-20 {
+	margin-top: 20px;
+}
+
+.mb-40 {
+	margin-bottom: 40px;
+}
+
+.mb-20 {
+	margin-bottom: 20px;
+}
+
+.bold {
+	font-weight: bold;
+}
+
+.text-left {
+	text-align: left !important;
+}
+
+.text-right {
+	text-align: right !important;
+}

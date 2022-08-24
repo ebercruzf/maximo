@@ -1,0 +1,211 @@
+<!-- <security:authorize access="isAuthenticated()"> -->
+<!--     <c:redirect url="homepage"/> -->
+<!-- </security:authorize> -->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" lang="es">
+
+<head>
+<base href="/maximo/">
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<link href="/maximo/resources/static/css/mundox/main.css" rel="stylesheet">
+<link href="/maximo/resources/static/css/maximo.css" rel="stylesheet">
+<link href="/maximo/resources/static/css/fontawesome.min.css"
+	rel="stylesheet">
+<link href="/maximo/resources/static/css/selectize.css" rel="stylesheet">
+<link href="/maximo/resources/static/publicos/css/cargando.css"
+	rel="stylesheet" type="text/css" />
+
+<!-- <script src="/maximo/resources/static/js/analytics.js"></script> -->
+<script src="/maximo/resources/static/js/datatables.min.js"></script>
+<script src="/maximo/resources/static/js/fontawesome.min.js"></script>
+<script src="/maximo/resources/static/js/jquery.min.js"></script>
+<script src="/maximo/resources/static/js/jquery-ui.js"></script>
+<script src="/maximo/resources/static/js/jquery-ui-datepicker.js"></script>
+<script src="/maximo/resources/static/js/reloj.js"></script>
+
+<script src="/maximo/resources/static/js/main.js"></script>
+<script src="/maximo/resources/static/js/plugins.js"></script>
+<script src="/maximo/resources/static/js/webfont.js"></script>
+<script src="/maximo/resources/static/js/vendor/modernizr.js"></script>
+<script src="/maximo/resources/static/js/vendor/pace.min.js"></script>
+
+<script src="/maximo/resources/static/js/libs/angular.js"></script>
+<script src="/maximo/resources/static/js/libs/angular-resource.js"></script>
+<script src="/maximo/resources/static/js/libs/angular-route.js"></script>
+<script src="/maximo/resources/static/js/libs/angular-sanitize.min.js"></script>
+<script src="/maximo/resources/static/js/vendor/selectize.js"></script>
+<script src="/maximo/resources/static/js/vendor/angular-selectize.js"></script>
+<script src="/maximo/resources/static/js/libs/blob.js"></script>
+<script src="/maximo/resources/static/js/libs/fileSaver.min.js"></script>
+<script src="/maximo/resources/static/js/validator.js"></script>
+<!-- <script src="/maximo/resources/static/js/libs/ui-bootstrap-tpls-2.5.0.min.js"></script> -->
+<!-- #################################PARA MODAL################################### -->
+
+<link href="/maximo/resources/static/js/libs/bootstrap/3.3.7/css/bootstrap.min.css" type="text/css" />
+<link href="/maximo/resources/static/js/libs/bootstrap/3.3.7/css/bootstrap.css" type="text/css" />
+
+<script src="/maximo/resources/static/js/libs/bootstrap/gh-pages/ui-bootstrap-tpls-2.5.0.js"></script>
+<!-- #####################################FIN MODAL############################### -->
+
+<script src="/maximo/resources/static/publico/librerias/angular/angular-cookies.js"></script>
+<script src="/maximo/resources/static/publico/librerias/otras/angular-jwt.js"/></script>
+
+	
+<link href="/maximo/resources/static/css/angular/ng-grid.css" type="text/css" />
+<script src="/maximo/resources/static/js/libs/ng-grid.js"></script>
+
+<script type="text/javascript"
+	src="/maximo/resources/static/privado/controlador/homepage.js"></script>
+
+<script type="text/javascript"
+	src="/maximo/resources/static/privado/controlador/serviciosValidar.js"></script>
+
+<script src="/maximo/resources/static/publico/controlador/service/autenticacionServiceLog.js"></script>
+<script src="/maximo/resources/static/publico/controlador/service/serviceClientLogin.js"></script>
+
+<script src="/maximo/resources/static/publico/controlador/service/serviceClientLogin.js"></script>
+
+<script type="text/javascript"
+	src="/maximo/resources/static/privado/controlador/directiva/servicioVariablesSistema.js"></script>
+	
+
+<script src="/maximo/resources/static/privado/controlador/informacion/ctrlConsultaBusquedaPeliculaPorNombre.js"></script>	
+
+
+				
+				
+<title>M.A.X.I.M.O</title>
+</head>
+<body onLoad="setInterval('cargaReloj()',1000);" ng-app='mHome'
+	ng-controller='ctrlHome' data-ng-init="imprimeInfo()">
+
+	<div ng-include="'/maximo/resources/static/views/publico/cargando.html'"
+		ng-show="cargando">
+		<div class="modal" ng-if="modal.visible">
+			<div>
+				<h2 ng-bind="modal.modalMsg1"></h2>
+				<div ng-bind="modal.modalMsg2"></div>
+
+			</div>
+		</div>
+	</div>
+
+	<header>
+		<nav class="navbar navbar-default navbar-fixed-top bg-dark">
+			<div class="container">
+				<div class="navbar-header">
+					<div class="navbar-brand">
+						<img src="/maximo/resources/static/img/logoSistema.png">
+					</div>
+				</div>
+				<p class="navbar-text navbar-right mt-20">DIRECCIÓN DE MUNDOX-DEVELOP</p>
+				
+			</div>
+		</nav>
+
+
+
+
+ 
+
+		<div class="navbar sub-navbar navbar-fixed-top">
+			<div class="container">
+				<div class="navbar-header">
+					<p class="navbar-left fs-14 mt-20" id="reloj"></p>
+				</div>
+
+				<div class="dropdown navbar-right">
+					<button class="btn btn-default dropdown-toggle btn-xs navbar-btn"
+						type="button" id="dropdownMenu1" data-toggle="dropdown"
+						aria-haspopup="true" aria-expanded="true">
+						<i class="fas fa-cog color-icon"></i> <i
+							class="fas fa-caret-down color-icon"></i>
+						<!-- <span class="caret"></span> -->
+					</button>
+					<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+						<li><a href="cambiopassword" class="fs-14"><i
+								class="fas fa-key color-icon"></i> Cambiar contraseña</a></li>
+						<li role="separator" class="divider"></li>
+						<li><a href="#" ng-click="logout()" class="fs-14"><i
+								class="fas fa-sign-out-alt color-icon"></i> Cerrar Sesión</a></li>
+					</ul>
+				</div>
+				<p class="navbar-text navbar-right fs-14 text-right">
+					<i class="fas fa-user-md color-icon"></i> <b class="nombre-usuario"
+						ng-bind="nombreUsuario"></b> &nbsp; <br> (<span
+						class="puesto-usuario" ng-bind="puestoUsuario"></span>) &nbsp;
+				</p>
+				
+			</div>
+		</div>
+
+
+	</header>
+
+	<div class="container-fluid mt-80">
+		<div class="col-sm-12">
+			<h3>MAXIMO | Sistema de Servicios MundoX</h3>
+			<hr class="red">
+		</div>
+		<div class="col-md-2">
+<!-- 			<a class="btn btn-default btn-xs btn-block mt-10" href="index">  -->
+			<a class="btn btn-default btn-xs btn-block mt-10" href="bandejasist"> 
+			<i class="fas fa-home color-icon"></i> Inicio MAXIMO</a> 
+
+			<ul class="nav navbar-pills nav-stacked bg-dark fs-14 mt-20">
+
+				
+					
+				<li role="presentation" class="dropdown"><a
+					class="dropdown-toggle nolink txt-dark-gray" data-toggle="dropdown"
+					href="#" role="button" aria-haspopup="true" aria-expanded="false">
+						Consultas <span class="caret"></span>
+					</a>
+					<ul class="dropdown-menu fs-14">
+					    
+					    <li><a class="nolink txt-dark-gray" href="busquedapeliculapornombre">Busqueda Pelicula </a></li>
+<!-- 						<li><a class="nolink txt-dark-gray" href="consultamovimientosgastos">Consulta </a></li> -->
+<!-- 						<li><a class="nolink txt-dark-gray" href="consultamovimientoingreso">Alta </a></li> -->
+						
+					</ul>
+				</li>
+				
+				
+
+
+
+
+
+
+		</div>
+		<div class="col-md-10">
+			<div ng-view></div>
+		</div>
+	</div>
+
+	<footer class="main-footer mt-40 fs-12">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-1">
+					<img src="/maximo/resources/static/img/logoSistema.png" height="60">
+				</div>
+				<div class="col-sm-11">
+					<div style="color: black">
+					    
+						Copyright © 2019 | Grupo Privado MundoX <br />Todos
+						los derechos reservados<br />MAXIMO 1.0.0
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
+</body>
+</html>
