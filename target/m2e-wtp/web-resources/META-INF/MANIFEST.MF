@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Built-By: eber
+Build-Jdk: 17.0.4
+Implementation-Title: maximo
+Implementation-Version: 0.0.1-SNAPSHOT
+Implementation-Vendor-Id: mx.com.maximo
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-boot
+ -starter-parent/maximo
+Main-Class: mx.com.mundox.maximo.MaximoApplication
+Created-By: Maven Integration for Eclipse
+

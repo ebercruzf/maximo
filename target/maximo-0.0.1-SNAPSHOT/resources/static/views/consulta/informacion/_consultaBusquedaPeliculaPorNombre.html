@@ -1,0 +1,306 @@
+<div ng-app='mHome' ng-controller='ctrlBuscaPeliculaPorNombreTodo' >
+<!-- data-ng-init="imprimeInfoCuenta()" -->
+    <!--  <div ng-include="'/sist/resources/static/views/publico/cargando.html'" ng-show="cargando">
+		<div class="modal" ng-if="modal.visible">
+			<div>
+				<h2 ng-bind="modal.modalMsg1"></h2>
+				<div ng-bind="modal.modalMsg2"></div>
+
+			</div>
+		</div>
+	</div>
+-->
+
+    <!-- Migajas de pan -->
+    <ol class="breadcrumb fs-16">
+        <li><i class="fas fa-home color-icon"></i> <a href="/maximo/index">Inicio</a> | Consultas -  Todas las peliculas en la web y en la base local </li>
+    </ol>
+   
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" data-target="#tab-01">Busqueda por nombre</a></li>
+
+    </ul>
+
+    <div class="tab-content tab-content2">
+        <div class="tab-pane active" id="tab-01">
+            <div class="row">
+                <div class="col-sm-6 text-left fs-12">
+                    Registro:
+                    <label class="badge fs-12" ng-bind="bandeja[0].length"></label>
+                </div>
+                <div class="col-sm-6 text-right">
+				
+				</div>
+            </div>
+
+<div class="panel-collapse collapse in" id="panel-RHC">
+            <div class="panel-body">
+
+<div class="row">
+
+<div classc="col-sm-4">
+             
+</div>
+</div>
+<br>
+
+				<div class="row">
+                    <div class="col-md-9  text-center">
+                        <input type="text" class="form-control" placeholder="Search for..." ng-model="inputBuscarPelicula" id="inputBuscarPeli">
+                    </div>
+                    
+                    <div class="col-md-3  text-left">
+                       <button type = "button" class = "btn btn-success btn-sm" ng-click="busquedaDosWSLocal()" >Buscar</button>   
+                    </div>
+                    
+                </div>
+                <div class="row">
+                    <div class="col-md-9 bg-dark text-center">
+                    </div>
+                    <div class="col-md-3 bg-dark text-center"> 
+                    </div>
+                </div>
+                <br>
+                
+                 <div class="row">
+					<div id="mensajesError" class="col-sm-12"></div>
+				</div>
+				
+
+                
+                <div ng-if="exitoConsultaWS==2">
+                
+                 <div class="row ">
+	                     <div class="card-body col-md-12 p-3 mb-2 bg-success text-white text-center">
+						    <h5 class="card-title">Informacion traida de www.omdbapi.com.</h5>
+						</div>
+                    </div>
+                    
+                <div class="row">
+                    <div class="col-md-3 bg-dark text-center">
+                        <p><strong>Nombre</strong></p>
+                    </div>
+                    <div class="col-md-3 bg-dark text-center">
+                        <p><strong>ID_Omdbapi</strong></p>
+                    </div>
+                     <div class="col-md-3 bg-dark text-center">
+                        <p><strong>Poster</strong></p>
+                    </div>
+                    <div class="col-md-3 bg-dark text-center">
+                         <p><strong>Accion</strong></p>
+                    </div>
+                </div>
+                <div class="row" id="searchObjResults"  >
+					
+                    <div class="col-md-3">
+                       <p class="text-center" ng-bind="tituloPeliculaEncontrada">  
+                    </div>
+                    <div class="col-md-3 text-center">
+                        <p class="text-center" ng-bind="idOmdbapi">
+                    </div>
+                    <div class="col-md-3 text-center">
+                    <img ng-src="{{posterPelicula}}" alt="Sin imagen: N/A" >
+                    </div>
+                    
+                    <div class="col-md-3">
+                       <button type = "button" class = "btn btn-primary btn-sm" ng-click="agregarBusquedaFormulario()" >Agregar</button> 
+                       
+                         
+                    </div>
+                    
+<!--                     <div class="col-md-3"> -->
+<!--                        <button type = "button" class = "btn btn-primary btn-sm" ng-click="agregarBusquedaPelicula()" >Agregar</button>  -->
+                         
+<!--                     </div> -->
+                    
+             
+                </div>
+                </div>
+                
+                 
+                
+                <br>
+                
+
+
+<!-- ********************************************************************************************************************* -->
+
+                
+                <div class="row">
+					<div id="mensajesError" class="col-sm-12"></div>
+				</div>
+                
+				
+	
+                <div ng-if="muestraCuadroAgregar==2">
+                
+                     <div class="row ">
+	                     <div class="card-body col-md-12 p-3 mb-2 bg-success text-white text-center">
+						    <h5 class="card-title">Pelicula a Agregar a mi Base de datos.</h5>
+						</div>
+                    </div>
+                
+                	<div class="row">
+				    <div class="col-md-2 bg-dark text-center">
+                        <p><strong>Titulo:</strong></p>
+                    </div>
+                    
+                    <div class="col-md-1 bg-dark text-center">
+                        <p><strong>Puntuación:</strong></p>
+                    </div>
+                    <div class="col-md-2 bg-dark text-center">
+                        <p><strong>La vi/Fecha</strong></p>
+                    </div>
+                    <div class="col-md-2 bg-dark text-center">
+                        <p><strong>Comentarios</strong></p>
+                    </div>
+                    <div class="col-md-1 bg-dark text-center">
+                        <p><strong>imdbID</strong></p>
+                    </div>
+                     <div class="col-md-2 bg-dark text-center">
+                        <p><strong>Poster</strong></p>
+                    </div>
+                    <div class="col-md-2 bg-dark text-center">
+                       <p><strong>Accion</strong></p>
+                       
+                    </div>
+                </div>
+                
+                <div id="tablaCargaArreglo">
+                <div class="row" id="searchObjResults">
+					
+					<div class="col-md-2 text-center"> 
+                     <input type="text" class="form-control" placeholder="Puntuacion" ng-model="tituloPeliculaEncontrada" disabled>
+                    </div>
+                    <div class="col-md-1 text-center"> 
+                     <input type="text" class="form-control" placeholder="puntuacionEnviar" ng-model="puntuacionEnviar" id="idpuntuacionEnviar">
+                    </div>
+                    <div class="col-md-2">
+                      <input type="text" class="form-control" placeholder="dd/mm/aaaa" ng-model="fechaCuandolaviEnviar" id="idFecha" >
+<!--                       <div class="form-group datepicker-group col-sm-3"> -->
+<!-- 								<input class="inputfield100 smalldefault  fecha" id="idFecha" ng-model="parent.checkOut" name="hasta" type="text" readonly placeholder="dd/mm/aaaa"> -->
+					<!--                     </div> -->
+					</div>
+					
+
+                    <div class="col-md-2">
+                      <input type="text" class="form-control" placeholder="comentariosEnviar" ng-model="comentariosEnviar" id="idcomentariosEnviar"> 
+                    </div>
+                    <div class="col-md-2 text-center">
+                      <input type="text" class="form-control" placeholder="imdbID" ng-model="idOmdbapiEnviar" disabled>
+                    </div>
+                    <div class="col-md-1 text-center">
+                       <input type="text" class="form-control" placeholder="Poster" ng-model="posterPeliculaEnviar">
+                    </div>
+                    
+                    <div class="col-md-2  text-center">
+                       <button type = "button" class = "btn btn-primary btn-sm" ng-click="agregarGuardaConsultaLimpia()" >Guardar</button> 
+<!--                        <button type = "button" class = "btn btn-danger btn-sm" ng-click="eliminarBusquedaPelicula()" >Eliminar</button>  -->
+<!--                        <button type = "button" class = "btn btn-warning btn-sm" ng-click="editarBusquedaPelicula()" >Editar</button>  -->
+                       
+                    </div>
+             
+                </div>
+                 </div>
+                </div>
+                
+<!--                     ############################################################### -->
+					<br>
+					<div ng-if="muestraCuadroExistenciaBDloca==2">
+                
+                     <div class="row ">
+	                     <div class="card-body col-md-12 p-3 mb-2 bg-success text-white text-center">
+						    <h5 class="card-title">Pelicula existentes en mi Base de datos.</h5>
+						</div>
+                    </div>
+                
+                	<div class="row">
+				    <div class="col-md-3 bg-dark text-center">
+                        <p><strong>Titulo:</strong></p>
+                    </div>
+                    
+                    <div class="col-md-2 bg-dark text-center">
+                        <p><strong>Puntuación:</strong></p>
+                    </div>
+                    <div class="col-md-2 bg-dark text-center">
+                        <p><strong>La vi/Fecha</strong></p>
+                    </div>
+                    <div class="col-md-2 bg-dark text-center">
+                        <p><strong>Comentarios</strong></p>
+                    </div>
+                    <div class="col-md-1 bg-dark text-center">
+                        <p><strong>imdbID</strong></p>
+                    </div>
+<!--                      <div class="col-md-2 bg-dark text-center"> -->
+<!--                         <p><strong>Poster</strong></p> -->
+<!--                     </div> -->
+                    <div class="col-md-2 bg-dark text-center">
+                       <p><strong>Accion</strong></p>
+                       
+                    </div>
+                </div>
+                
+                <div id="tablaCargaArregloConsultaPorCuenta">
+                <div class="row" id="searchObjResults">
+					
+					<div class="col-md-3 text-center"> 
+                     <input type="text" class="form-control"  ng-model="datoBaseLocatituloPelicula" disabled id="datoBaseLocatituloPelicula">
+                    </div>
+                    <div class="col-md-2 text-center"> 
+                     <input type="text" class="form-control"  placeholder="Eje: 5" ng-model="datoBaseLocapuntuacionRating" id="datoBaseLocapuntuacionRating" >
+                    </div>
+                    <div class="col-md-2">
+                      <input type="text" class="form-control" placeholder="dd/mm/aaaa" ng-model="datoBaseLocafechaCuandoLaVi" id="datoBaseLocafechaCuandoLaVi" >
+<!--                       <div class="form-group datepicker-group col-sm-3"> -->
+<!-- 								<input class="inputfield100 smalldefault  fecha" id="idFecha" ng-model="parent.checkOut" name="hasta" type="text" readonly placeholder="dd/mm/aaaa"> -->
+					<!--                     </div> -->
+					</div>
+					
+
+                    <div class="col-md-2">
+                      <input type="text" class="form-control" placeholder="comentariosEnviar" ng-model="datoBaseLocacomentarios" id="idcomentariosEnviar"> 
+                    </div>
+                    <div class="col-md-2 text-center">
+                      <input type="text" class="form-control"  ng-model="datoBaseLocaimdbIDBd" disabled id= "datoBaseLocaimdbIDBd">
+                    </div>
+<!--                     <div class="col-md-1 text-center"> -->
+<!--                        <input type="text" class="form-control" placeholder="Poster" ng-model="posterPeliculaEnviar"> -->
+<!--                     </div> -->
+                    
+                    <div class="col-md-1  text-center">
+<!--                        <button type = "button" class = "btn btn-primary btn-sm" ng-click="agregarBusquedaPelicula()" >Guardar</button>  -->
+                       <button type = "button" class = "btn btn-danger btn-sm" ng-click="eliminarActualizarPelicula()" >Eliminar</button> 
+                       <button type = "button" class = "btn btn-warning btn-sm" ng-click="editarActualizarPelicula()" >Editar</button> 
+                       
+                    </div>
+             
+                </div>
+                 </div>
+                 
+                </div>
+                
+<!--                 ############################################################## -->
+                 </div>
+                </div>
+
+
+
+
+<div class="jumbotron" id="panel-do">
+     
+</div>
+
+<div class="jumbotron" id="panel-tres">
+          
+
+                
+                
+</div>
+                
+                
+        </div>
+        
+
+    </div>
+    <!-- /Pesta�as de navegaci�n -->
+</div>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" lang="es">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link href="/maximo/resources/static/publico/librerias/bootstrap/css/bootstrap.min.css" rel="stylesheet" >
+
+<link rel="stylesheet" href="/maximo/resources/static/publico/librerias/bootstrap/css/font-awesome.min.css">
+<script src="/maximo/resources/static/publico/librerias/jquery/jquery.min.js"></script>
+<!-- <script src="/maximo/resources/static/publico/librerias/bootstrap/js/bootstrap.min.js"></script>  -->
+
+<!-- #################################PARA MODAL################################### -->
+<link href="/maximo/resources/static/publico/librerias/bootstrap/3.3.7/css/bootstrap.min.css" type="text/css" />
+<link href="/maximo/resources/static/publico/librerias/bootstrap/3.3.7/css/bootstrap.css" type="text/css" />
+<link href="/maximo/resources/static/publico/librerias/css/style.css" type="text/css" />
+<!-- #####################################FIN MODAL############################### -->
+
+<script src="/maximo/resources/static/publico/librerias/angular/angular.js"></script>
+<script src="/maximo/resources/static/publico/librerias/angular/angular-resource.js"></script>
+<script src="/maximo/resources/static/publico/librerias/angular/angular-route.js"></script>
+<script src="/maximo/resources/static/publico/librerias/angular/angular-sanitize.min.js"></script>
+<script src="/maximo/resources/static/publico/librerias/angular/angular-cookies.js"></script>
+<script src="/maximo/resources/static/publico/librerias/angular/angular-messages.min.js"></script>
+<script src="/maximo/resources/static/publico/librerias/otras/angular-ui-router.min.js"></script>
+<script src="/maximo/resources/static/publico/librerias/otras/angular-mocks.js"></script>
+<!-- #####################################FIN MODAL############################### -->
+<script src="/maximo/resources/static/publico/librerias/bootstrap/gh-pages/ui-bootstrap-tpls-2.5.0.js"></script>
+<!-- #####################################FIN MODAL############################### -->
+<script src="/maximo/resources/static/publico/librerias/otras/google-crypto-aes.min.js"/></script>
+<script src="/maximo/resources/static/publico/librerias/otras/jsencrypt.min.js"/></script>
+
+<script src="/maximo/resources/static/publico/librerias/otras/angular-jwt.js"/></script>
+<script src="/maximo/resources/static/publico/librerias/otras/ngStorage.min.js"/></script>
+
+<script src="/maximo/resources/static/publico/controlador/ctrLoginGood.js"></script>
+<script src="/maximo/resources/static/publico/controlador/service/autenticacionServiceLog.js"></script>
+<link href="/maximo/resources/static/publico/css/cargando.css" type="text/css" />
+
+<script src="/maximo/resources/static/publico/controlador/service/serviceClientLogin.js"></script>
+<script src="/maximo/resources/static/js/validator.js"></script>
+
+<title>Login:: Sistema de MundoX (MAXIMO)</title>
+<base href="/">
+
+<style type="text/css">
+	.login-form {
+		width: 340px;
+		margin: 50px auto;
+	}
+    .login-form form {        
+    	margin-bottom: 15px;
+        background: #f7f7f7;
+        box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+        padding: 30px;
+    }
+    .login-form h2 {
+        margin: 0 0 15px;
+    }
+    .form-control, .btn {
+        min-height: 38px;
+        border-radius: 2px;
+    }
+	.input-group-addon .fa {
+        font-size: 18px;
+    }
+    .btn {        
+        font-size: 15px;
+        font-weight: bold;
+    }
+</style>
+</head>
+<body ng-app='mHome' ng-controller='mainCtrl' >
+
+<div class="login-form">
+  <div class="card-body">
+
+<!--        <div  class="row"> -->
+<!-- 		     <div id="mensajesSeessionCerrada" class="col-md-12"></div> -->
+<!-- 	    </div> -->
+    <form name="myForm" method="post">
+    <h2 class="text-center">Iniciar sesión</h2> 
+     <a href="path/to/test.ext" download rel="noopener noreferrer" target="_blank">
+   test
+</a>
+      <div class="form-group">
+        <input ng-model="loginData.username" type="text" class="form-control"
+        name="username" id="username" placeholder="Usuario" ng-minlength="9" ng-maxlength="20" required  autofocus >
+      </div>
+      
+<!--       	<span ng-show="myForm.username.$error.required && myForm.username.$dirty">required</span> -->
+<!--    		<span ng-show="!myForm.username.$error.minLength && !myForm.username.$error.maxLength && myForm.username.$error.pattern && myForm.username.$dirty">Must start with a letter, and contain letters &amp; numbers only.</span> -->
+   		<span ng-show="!myForm.username.$error.required && (myForm.username.$error.minlength || myForm.username.$error.maxlength) && myForm.username.$dirty">El usuario debe tener entre 9 y 20 caracteres.</span>
+
+      <div class="form-group">
+        <input ng-model="loginData.password" type="password" class="form-control"
+        name="password" id="password" placeholder="Password" minlength="8" required autocomplete="password">
+      </div>
+
+      <div class="form-group">
+        <input ng-disabled="!myForm.$valid" ng-click="login()" type="submit" class="btn btn-lg btn-primary btn-block" value="Acceder">
+  
+      </div>
+      
+      <div class="row">
+		<div id="mensajesErrorLogin" class="col-md-12"></div>
+	  </div>
+	  <div class="row">
+		<div id="mensajesErrorSesionFront" class="col-md-12"></div>
+	  </div>
+	  
+	  	      
+<!-- 	        <div > -->
+<!-- 		      <button class="btn btn-info" ng-click="openSession()" style="margin: 15px;">Open ModalOpenSEssion</button> -->
+<!-- 		      <h2 style="color: red;">{{result}}</h2> -->
+<!-- 		    </div> -->
+	       
+<!-- 	       SECCION MODAL>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
+<!-- 	        <div > -->
+<!-- 		      <button class="btn btn-info" ng-click="open()" style="margin: 15px;">Open Modal</button> -->
+<!-- 		      <h2 style="color: red;">{{result}}</h2> -->
+<!-- 		    </div> -->
+	
+    </form>
+
+<!-- esNoAutorizado -->
+  </div>
+</div>
+
+<div ng-include="'./maximo/resources/static/publico/pages/cargando.html'" ng-show="cargando"></div>
+
+	
+
+
+</body>
+</html>
